@@ -22,15 +22,17 @@ class BtorInstaller(SolverInstaller):
 
     def __init__(self, install_dir, bindings_dir, solver_version,
                  mirror_link=None, git_version=None):
-        native_link = "https://github.com/Boolector/boolector/archive/%s.tar.gz"
-        archive_name = "boolector-%s.tar.gz"
+        native_link = "https://github.com/Boolector/boolector/archive/master.zip"
+        archive_name = "boolector-master.zip"
 
+        """
         if git_version:
             native_link = native_link % git_version
             archive_name = archive_name % git_version
         else:
             native_link = native_link % solver_version
             archive_name = archive_name % solver_version
+        """
 
         SolverInstaller.__init__(self, install_dir=install_dir,
                                  bindings_dir=bindings_dir,
@@ -56,7 +58,7 @@ class BtorInstaller(SolverInstaller):
         CMAKE_OPTS += ' -DPYTHON_EXECUTABLE=' + PYTHON_EXECUTABLE
 
         # Unpack
-        SolverInstaller.untar(os.path.join(self.base_dir, self.archive_name),
+        SolverInstaller.unzip(os.path.join(self.base_dir, self.archive_name),
                               self.extract_path)
 
         # Build lingeling
